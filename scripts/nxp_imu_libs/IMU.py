@@ -1,7 +1,7 @@
-from __future__ import print_function
-from __future__ import division
-from nxp_imu.FXAS21002 import FXAS21002
-from nxp_imu.FXOS8700 import FXOS8700
+#from __future__ import print_function
+#from __future__ import division
+from nxp_imu_libs.FXAS21002 import FXAS21002
+from nxp_imu_libs.FXOS8700 import FXOS8700
 from math import sin, cos, atan2, pi, sqrt
 from threading import Thread, Event
 import time

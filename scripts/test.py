@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
-from __future__ import division, print_function
-from nxp_imu import IMU
+#from __future__ import division, print_function
+from nxp_imu_libs import IMU
 import time
 
 """
@@ -21,19 +21,19 @@ pi@r2d2 nxp $ sudo i2cdetect -y 1
 
 
 def imu():
-	imu = IMU(gs=4, dps=2000, verbose=True)
+	imu = IMU(gs=4, dps=1000, verbose=True)
 	header = 67
 	print('-'*header)
 	print("| {:17} | {:20} | {:20} |".format("Accels [g's]", " Magnet [uT]", "Gyros [dps]"))
 	print('-'*header)
-	for _ in range(10):
+	for _ in range(1000):
 		a, m, g = imu.get()
 		print('| {:>5.2f} {:>5.2f} {:>5.2f} | {:>6.1f} {:>6.1f} {:>6.1f} | {:>6.1f} {:>6.1f} {:>6.1f} |'.format(
 			a[0], a[1], a[2],
 			m[0], m[1], m[2],
 			g[0], g[1], g[2])
 		)
-		time.sleep(0.50)
+		time.sleep(0.02)
 	print('-'*header)
 	print(' uT: micro Tesla')
 	print('  g: gravity')
@@ -64,7 +64,7 @@ def ahrs():
 
 if __name__ == "__main__":
 	try:
-		ahrs()
+		#ahrs()
 		imu()
 	except Exception as e:
 		print(e)

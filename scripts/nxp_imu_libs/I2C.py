@@ -1,16 +1,17 @@
-from __future__ import print_function
-from __future__ import division
+#from __future__ import print_function
+#from __future__ import division
 import os
 
 try:
     # can also be done with: export TRAVIS=1
-    if 'TRAVIS' in os.environ:
-        raise ImportError()
+    #if 'TRAVIS' in os.environ:
+    #    raise ImportError()
 
     from smbus2 import SMBus
 
 except ImportError:
-    from fake_rpi.smbus import SMBus as fakeSMBus
+    #from fake_rpi.smbus import SMBus as fakeSMBus
+    print('No SMBus')
 
     class SMBus(fakeSMBus):
         resp = {

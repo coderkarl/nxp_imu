@@ -128,7 +128,7 @@ class FXOS8700(I2C):
         # status, axhi, axlo, ayhi, aylo ... mxhi, mxlo ...
         # data = self.read_block(0x0, 13)  # why read 0???
         # data = data[1:]  # remove status bit
-        data = self.read_block(0x1, 13)  # do this???
+        data = self.read_block(0x1, 12)  # do this???
 
         # data = self.read_block(FXOS8700_REGISTER_STATUS | 0x80, 13)
         # print('status:', data[0])
@@ -165,7 +165,7 @@ class FXOS8700(I2C):
         # if data[0] > 0:
         #     print('accel status reg is not zero')
         data = bytearray(data)
-        data = struct.unpack('>xhhhhhh', data)
+        data = struct.unpack('>hhhhhh', data)
 
         d = data[:3]
         accel = ([(x >> 2) * self.scale for x in d])

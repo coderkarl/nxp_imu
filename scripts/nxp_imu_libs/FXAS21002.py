@@ -176,10 +176,10 @@ class FXAS21002(I2C):
 
     def get(self):
         # 6 bytes: axhi, axlo, ayhi, aylo, azhi, azlo
-        data = self.read_block(0x1, 7)
+        data = self.read_block(0x1, 6)
         data = bytearray(data)
         #print('hi',data[0],data[1],data[2],data[3],data[4],data[5],data[6])
-        data = struct.unpack('>xhhh', data)  # '>' big-endian, 'h' short (2 bytes)
+        data = struct.unpack('>hhh', data)  # '>' big-endian, 'h' short (2 bytes)
         gyro = ([x * self.scale for x in data])
 
         return tuple(gyro)

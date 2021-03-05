@@ -82,12 +82,12 @@ class ImuReader(object):
     def send_tf(self,accel_gs):
         ##### USE IMU TO PUBLISH TRANSFORM BETWEEN LASER AND BASE
         br = tf.TransformBroadcaster()
-        accx = accel_gs[0]*self._GRAVITY+0.04
-        accy = accel_gs[1]*self._GRAVITY+0.01
+        accx = accel_gs[0]*self._GRAVITY+0.1
+        accy = accel_gs[1]*self._GRAVITY+0.4
         if(abs(accx) < 3 and abs(accy) < 3):
             try:
-                roll_rad = -math.asin(accel_gs[1])
-                pitch_rad = math.asin(accel_gs[0])
+                roll_rad = -math.asin(accy/self._GRAVITY)
+                pitch_rad = math.asin(accx/self._GRAVITY)
             except:
                 roll_rad = self.roll_rad
                 pitch_rad = self.pitch_rad
@@ -124,7 +124,7 @@ def main(args):
         heading_pub.publish(gyro_heading_msg)
         check_pub.publish(check_msg)
         
-        imu_reader.send_tf(accel_gs)
+        #imu_reader.send_tf(accel_gs)
         
         r.sleep()
 
